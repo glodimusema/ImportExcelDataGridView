@@ -51,10 +51,8 @@ namespace GanerateCarte
         public int GetMaxId(string tableName)
         {
             int maxId = 0;
-
             // Créez la requête SQL pour obtenir l'ID maximal
             string query = $"SELECT MAX(codeChiffre) FROM {tableName}";
-
             using (SqlConnection connection = new SqlConnection(clsConnexion.chemin))
             {
                 SqlCommand command = new SqlCommand(query, connection);

@@ -59,7 +59,7 @@
             // btnImport
             // 
             this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImport.Location = new System.Drawing.Point(12, 615);
+            this.btnImport.Location = new System.Drawing.Point(431, 615);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(290, 59);
             this.btnImport.TabIndex = 2;
@@ -71,7 +71,7 @@
             // 
             this.comboBoxSheets.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxSheets.FormattingEnabled = true;
-            this.comboBoxSheets.Location = new System.Drawing.Point(319, 547);
+            this.comboBoxSheets.Location = new System.Drawing.Point(566, 542);
             this.comboBoxSheets.Name = "comboBoxSheets";
             this.comboBoxSheets.Size = new System.Drawing.Size(290, 37);
             this.comboBoxSheets.TabIndex = 3;
@@ -81,7 +81,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(322, 513);
+            this.label2.Location = new System.Drawing.Point(570, 507);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(257, 29);
             this.label2.TabIndex = 4;
@@ -90,9 +90,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(12, 528);
+            this.button1.Location = new System.Drawing.Point(259, 542);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(301, 56);
+            this.button1.Size = new System.Drawing.Size(301, 37);
             this.button1.TabIndex = 5;
             this.button1.Text = "Telecharger Fichier Excel";
             this.button1.UseVisualStyleBackColor = true;
