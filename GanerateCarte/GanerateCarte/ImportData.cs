@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OfficeOpenXml;
-
+using System.Data.SqlClient;
 
 namespace GanerateCarte
 {
@@ -82,6 +82,38 @@ namespace GanerateCarte
             }
         }
 
+
+        private void InsertDataFromDataGridView()
+        {
+            using (SqlConnection connection = new SqlConnection(clsConnexion.chemin))
+            {
+                connection.Open();
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    // Vérifiez si la ligne n'est pas nouvelle (la dernière ligne est souvent une ligne vide pour ajouter des données)
+                    if (!row.IsNewRow)
+                    {
+                        // Créez une commande SQL pour insérer les données
+                        string query = "INSERT INTO tpersonne (Column1, Column2, Column3) VALUES (@Value1, @Value2, @Value3)";
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            // Utilisation des index pour accéder aux cellules
+                            command.Parameters.AddWithValue("@Value1", row.Cells[0].Value); // Index 0 pour la première colonne
+                            command.Parameters.AddWithValue("@Value2", row.Cells[1].Value); // Index 1 pour la deuxième colonne
+                            command.Parameters.AddWithValue("@Value3", row.Cells[2].Value); // Index 2 pour la troisième colonne
+
+                            // Exécutez la commande
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+
+            MessageBox.Show("Données insérées avec succès !");
+        }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -95,6 +127,16 @@ namespace GanerateCarte
             }
         }
 
-
+        private void comboBoxSheets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxSheets.SelectedItem != null)
+            {
+                ImportSelectedSheet(comboBoxSheets.SelectedItem.ToString());
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner une feuille à importer.");
+            }
+        }
     }
 }

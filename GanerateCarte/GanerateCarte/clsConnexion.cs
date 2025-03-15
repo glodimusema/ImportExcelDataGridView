@@ -8,6 +8,6 @@ namespace GanerateCarte
 {
     class clsConnexion
     {
-        public static string chemin = "server=localhost;database=Fecoppeme_db;Integrated Security=true;";
+        public static string chemin = "server=localhost;database=carte_db;Integrated Security=true;";
     }
 }
