@@ -379,3 +379,6 @@ F:\Projets\Projet C#\ImportExcelDataGridView\GanerateCarte\GanerateCarte\obj\Deb
 F:\Projets\Projet C#\ImportExcelDataGridView\GanerateCarte\GanerateCarte\obj\Debug\GanerateCarte.csproj.CoreCompileInputs.cache
 F:\Projets\Projet C#\ImportExcelDataGridView\GanerateCarte\GanerateCarte\obj\Debug\GanerateCarte.exe
 F:\Projets\Projet C#\ImportExcelDataGridView\GanerateCarte\GanerateCarte\obj\Debug\GanerateCarte.pdb
+F:\Projets\Projet C#\ImportExcelDataGridView\GanerateCarte\GanerateCarte\obj\Debug\GanerateCarte.rpt_CarteBenefiaire.resources
+F:\Projets\Projet C#\ImportExcelDataGridView\GanerateCarte\GanerateCarte\obj\Debug\GanerateCarte.rpt_CarteBeneficiaire2.resources
+F:\Projets\Projet C#\ImportExcelDataGridView\GanerateCarte\GanerateCarte\obj\Debug\GanerateCarte.exe.licenses

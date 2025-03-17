@@ -112,12 +112,25 @@
     <Compile Include="rptAutocollant.Designer.cs">
       <DependentUpon>rptAutocollant.cs</DependentUpon>
     </Compile>
+    <Compile Include="rpt_CarteBenefiaire.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rpt_CarteBenefiaire.Designer.cs">
+      <DependentUpon>rpt_CarteBenefiaire.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rpt_CarteBeneficiaire2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rpt_CarteBeneficiaire2.Designer.cs">
+      <DependentUpon>rpt_CarteBeneficiaire2.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportData.resx">
       <DependentUpon>ImportData.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -129,6 +142,12 @@
     </Compile>
     <EmbeddedResource Include="rptAutocollant.resx">
       <DependentUpon>rptAutocollant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rpt_CarteBenefiaire.resx">
+      <DependentUpon>rpt_CarteBenefiaire.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rpt_CarteBeneficiaire2.resx">
+      <DependentUpon>rpt_CarteBeneficiaire2.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

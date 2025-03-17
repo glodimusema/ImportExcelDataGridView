@@ -11,6 +11,7 @@ using OfficeOpenXml;
 using System.Data.SqlClient;
 using System.IO;
 using DevExpress.XtraEditors;
+using DevExpress.XtraReports.UI;
 
 namespace GanerateCarte
 {
@@ -215,6 +216,133 @@ namespace GanerateCarte
             else
             {
                 MessageBox.Show("Veuillez sélectionner une feuille à importer.");
+            }
+        }
+
+        public int GetMaxId(string tableName)
+        {
+            int maxId = 0;
+            // Créez la requête SQL pour obtenir l'ID maximal
+            string query = $"SELECT COUNT(id) FROM {tableName}";
+            using (SqlConnection connection = new SqlConnection(clsConnexion.chemin))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                try
+                {
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+
+                    // Vérifiez si le résultat est null et affectez la valeur maximale
+                    if (result != DBNull.Value)
+                    {
+                        maxId = Convert.ToInt32(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Gérez les exceptions ici (journalisation, relance, etc.)
+                    Console.WriteLine("Une erreur est survenue : " + ex.Message);
+                }
+            }
+
+            return maxId;
+        }
+
+        private void ImportData_Load(object sender, EventArgs e)
+        {
+            txtMax.Text = GetMaxId("tpersonne").ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (txtNombre1.Text == "" || txtNombre2.Text == "")
+            {
+                MessageBox.Show("Selectionnez l'année svp !!!");
+            }
+            else
+            {
+                try
+                {
+                    rpt_CarteBenefiaire rpt = new rpt_CarteBenefiaire();
+                    rpt.DataSource = clsRapport.GetInstance().data_beneficaire(int.Parse(txtNombre1.Text), int.Parse(txtNombre2.Text));
+                    using (ReportPrintTool printTool = new ReportPrintTool(rpt))
+                    {
+                        printTool.ShowPreviewDialog();
+                    }
+                }
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (txtNombre1.Text == "" || txtNombre2.Text == "")
+            {
+                MessageBox.Show("Selectionnez l'année svp !!!");
+            }
+            else
+            {
+                try
+                {
+                    rpt_CarteBeneficiaire2 rpt = new rpt_CarteBeneficiaire2();
+                    rpt.DataSource = clsRapport.GetInstance().data_beneficaire_enceinte(int.Parse(txtNombre1.Text), int.Parse(txtNombre2.Text));
+                    using (ReportPrintTool printTool = new ReportPrintTool(rpt))
+                    {
+                        printTool.ShowPreviewDialog();
+                    }
+                }
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (txtNombre1.Text == "" || txtNombre2.Text == "" || txtAirSante.Text=="")
+            {
+                MessageBox.Show("Selectionnez l'année svp !!!");
+            }
+            else
+            {
+                try
+                {
+                    rpt_CarteBenefiaire rpt = new rpt_CarteBenefiaire();
+                    rpt.DataSource = clsRapport.GetInstance().data_air(int.Parse(txtNombre1.Text), int.Parse(txtNombre2.Text),txtAirSante.Text);
+                    using (ReportPrintTool printTool = new ReportPrintTool(rpt))
+                    {
+                        printTool.ShowPreviewDialog();
+                    }
+                }
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (txtNombre1.Text == "" || txtNombre2.Text == "" || txtAirSante.Text == "")
+            {
+                MessageBox.Show("Selectionnez l'année svp !!!");
+            }
+            else
+            {
+                try
+                {
+                    rpt_CarteBeneficiaire2 rpt = new rpt_CarteBeneficiaire2();
+                    rpt.DataSource = clsRapport.GetInstance().data_air_enceinte(int.Parse(txtNombre1.Text), int.Parse(txtNombre2.Text), txtAirSante.Text);
+                    using (ReportPrintTool printTool = new ReportPrintTool(rpt))
+                    {
+                        printTool.ShowPreviewDialog();
+                    }
+                }
+                catch (Exception ex)
+                { MessageBox.Show(ex.Message); }
             }
         }
     }
