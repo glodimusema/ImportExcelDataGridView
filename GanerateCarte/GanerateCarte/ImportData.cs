@@ -30,6 +30,7 @@ namespace GanerateCarte
         private void button1_Click(object sender, EventArgs e)
         {
             InsertDataFromDataGridView();
+            txtMax.Text = GetMaxId("tpersonne").ToString();
         }
 
         private void LoadSheetsIntoComboBox(string filePath)
@@ -152,35 +153,38 @@ namespace GanerateCarte
 
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
-                        int idMax = GetMaxId("tpersonne", "code", "air_sante", row.Cells[11].Value.ToString());
-                        int nbrLimte = idMax + 1;
-                        codage.QRCode(pic, row.Cells[11].Value.ToString() + " : " + nbrLimte.ToString());
-
-                        // Vérifiez si la ligne n'est pas nouvelle (la dernière ligne est souvent une ligne vide pour ajouter des données)
+                        // Vérifiez si la ligne n'est pas nouvelle
                         if (!row.IsNewRow)
                         {
-                            // Créez une commande SQL pour insérer les données
-                            string query = "INSERT INTO tpersonne (code,noms,sexe,age,garcon,fille,femme_enceinte,provenace,handicap,observation,zone_sante,air_sante,photo) VALUES (@code,@noms,@sexe,@age,@garcon,@fille,@femme_enceinte,@provenace,@handicap,@observation,@zone_sante,@air_sante,@photo)";
-
-                            using (SqlCommand command = new SqlCommand(query, connection))
+                            // Vérifiez que la cellule 11 a une valeur
+                            if (row.Cells[11].Value != null)
                             {
-                                // Utilisation des index pour accéder aux cellules
-                                command.Parameters.AddWithValue("@code", nbrLimte);
-                                command.Parameters.AddWithValue("@noms", row.Cells[1].Value.ToString()); // Index 1 pour la deuxième colonne
-                                command.Parameters.AddWithValue("@sexe", row.Cells[2].Value.ToString()); // Index 2 pour la troisième colonne
-                                command.Parameters.AddWithValue("@age", int.Parse(row.Cells[3].Value.ToString()));
-                                command.Parameters.AddWithValue("@garcon", int.Parse(row.Cells[4].Value.ToString()));
-                                command.Parameters.AddWithValue("@fille", int.Parse(row.Cells[5].Value.ToString()));
-                                command.Parameters.AddWithValue("@femme_enceinte", int.Parse(row.Cells[6].Value.ToString()));
-                                command.Parameters.AddWithValue("@provenace", row.Cells[7].Value.ToString());
-                                command.Parameters.AddWithValue("@handicap", int.Parse(row.Cells[8].Value.ToString()));
-                                command.Parameters.AddWithValue("@observation", "" + row.Cells[9].Value.ToString());
-                                command.Parameters.AddWithValue("@zone_sante", row.Cells[10].Value.ToString());
-                                command.Parameters.AddWithValue("@air_sante", row.Cells[11].Value.ToString());
-                                command.Parameters.AddWithValue("@photo", GetByteImage(pic.Image));
+                                int idMax = GetMaxId("tpersonne", "code", "air_sante", row.Cells[11].Value.ToString());
+                                int nbrLimte = idMax + 1;
+                                codage.QRCode(pic, row.Cells[11].Value.ToString() + " : " + nbrLimte.ToString());
 
-                                // Exécutez la commande
-                                command.ExecuteNonQuery();
+                                // Créez une commande SQL pour insérer les données
+                                string query = "INSERT INTO tpersonne (code,noms,sexe,age,garcon,fille,femme_enceinte,provenace,handicap,observation,zone_sante,air_sante,photo) VALUES (@code,@noms,@sexe,@age,@garcon,@fille,@femme_enceinte,@provenace,@handicap,@observation,@zone_sante,@air_sante,@photo)";
+
+                                using (SqlCommand command = new SqlCommand(query, connection))
+                                {
+                                    command.Parameters.AddWithValue("@code", nbrLimte);
+                                    command.Parameters.AddWithValue("@noms", row.Cells[1].Value?.ToString() ?? string.Empty);
+                                    command.Parameters.AddWithValue("@sexe", row.Cells[2].Value?.ToString() ?? string.Empty);
+                                    command.Parameters.AddWithValue("@age", Convert.ToInt32(row.Cells[3].Value ?? 0));
+                                    command.Parameters.AddWithValue("@garcon", Convert.ToInt32(row.Cells[4].Value ?? 0));
+                                    command.Parameters.AddWithValue("@fille", Convert.ToInt32(row.Cells[5].Value ?? 0));
+                                    command.Parameters.AddWithValue("@femme_enceinte", Convert.ToInt32(row.Cells[6].Value ?? 0));
+                                    command.Parameters.AddWithValue("@provenace", row.Cells[7].Value?.ToString() ?? string.Empty);
+                                    command.Parameters.AddWithValue("@handicap", Convert.ToInt32(row.Cells[8].Value ?? 0));
+                                    command.Parameters.AddWithValue("@observation", row.Cells[9].Value?.ToString() ?? string.Empty);
+                                    command.Parameters.AddWithValue("@zone_sante", row.Cells[10].Value?.ToString() ?? string.Empty);
+                                    command.Parameters.AddWithValue("@air_sante", row.Cells[11].Value.ToString());
+                                    command.Parameters.AddWithValue("@photo", pic?.Image != null ? GetByteImage(pic.Image) : (object)DBNull.Value);
+
+                                    // Exécutez la commande
+                                    command.ExecuteNonQuery();
+                                }
                             }
                         }
                     }
@@ -189,10 +193,10 @@ namespace GanerateCarte
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Erreur : " + ex.Message);
             }
-           
         }
+
 
         private void button1_Click_1(object sender, EventArgs e)
         {
