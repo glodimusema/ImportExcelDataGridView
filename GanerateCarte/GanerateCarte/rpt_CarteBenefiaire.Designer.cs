@@ -173,7 +173,7 @@
             this.xrLabel9.SizeF = new System.Drawing.SizeF(70.83339F, 13.9722F);
             this.xrLabel9.StylePriority.UseBorders = false;
             this.xrLabel9.StylePriority.UseFont = false;
-            this.xrLabel9.Text = "Air de Santé :";
+            this.xrLabel9.Text = "Aire de Santé :";
             // 
             // xrLabel4
             // 
